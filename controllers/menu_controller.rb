@@ -11,10 +11,11 @@ class MenuController
     puts "Main Menu - #{address_book.entries.count} entries"
 
     puts "1 - View all entries"
-    puts "2 - Create an entry"
-    puts "3 - Search for an entry"
-    puts "4 - Import entries from a cvs"
-    puts "5 - Exit"
+    puts '2 - View Entry Number n'
+    puts "3 - Create an entry"
+    puts "4 - Search for an entry"
+    puts "5 - Import entries from a cvs"
+    puts "6 - Exit"
     print "Enter your selection: "
     selection = gets.to_i
     case selection
@@ -23,18 +24,22 @@ class MenuController
         view_all_entries
         main_menu
       when 2
-        system "clear"
-        create_entry
+        system 'clear'
+        view_entry_number_n
         main_menu
       when 3
         system "clear"
-        search_entries
+        create_entry
         main_menu
       when 4
         system "clear"
-        read_csv
+        search_entries
         main_menu
       when 5
+        system "clear"
+        read_csv
+        main_menu
+      when 6
         puts "Good-bye!"
         exit(0)
       else
@@ -52,6 +57,33 @@ class MenuController
     end
     system 'clear'
     puts 'End of entries'
+  end
+
+  def number_n_submenu
+    puts 'Press m to return to main menu'
+    selection = gets.chomp
+    case selection
+      when 'm'
+        system 'clear'
+      else
+        system 'clear'
+        puts "#{selection} is not a valid input"
+        number_n_submenu
+    end
+  end
+
+  def view_entry_number_n
+    puts 'What is the entry number? '
+    entry_number = gets.chomp.to_i
+    if entry_number < address_book.entries.count
+      puts address_book.entries[entry_number]
+      number_n_submenu
+    else
+      puts "#{entry_number} is not a valid entry number"
+      view_entry_number_n
+    end
+
+
   end
 
   def create_entry
