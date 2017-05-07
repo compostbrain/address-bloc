@@ -8,6 +8,27 @@ class AddressBook
     @entries = []
   end
 
+  # Search AddressBook for a specific entry by name
+  def binary_search(name)
+    lower = 0
+    upper = entries.length - 1
+
+    while lower <= upper
+      mid = (lower + upper) / 2
+      mid_name = entries[mid].name
+
+      if name == mid_name
+        return entries[mid]
+      elsif name < mid_name
+        upper = mid -1
+      elsif name > mid_name
+        lower = mid + 1
+      end
+    end
+    return nil
+  end
+
+  # method for adding and entry to AddressBook
   def add_entry(name, phone_number, email)
     index = 0
     entries.each do |entry|
