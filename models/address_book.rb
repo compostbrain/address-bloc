@@ -8,6 +8,21 @@ class AddressBook
     @entries = []
   end
 
+  # Search AddressBook for a specific entry by name using iterative algorithm
+  def iterative_search(name)
+    counter = 0
+    limit = entries.length - 1
+
+    while counter <= limit
+      if name == entries[counter].name
+        return entries[counter]
+      else
+        counter += 1
+      end
+    end
+    return nil
+  end
+
   # Search AddressBook for a specific entry by name
   def binary_search(name)
     lower = 0
