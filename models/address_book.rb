@@ -77,4 +77,9 @@ class AddressBook
     end
   end
 
+  # method for deleting all entries
+  def nuke_all_entries
+    @entries = []
+  end
+
 end

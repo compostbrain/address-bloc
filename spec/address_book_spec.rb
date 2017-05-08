@@ -194,4 +194,15 @@ RSpec.describe AddressBook do
       expect(book.entries.first.name).to eq('Moses Mallone')
     end
   end
+
+  describe '#nuke_all_entries' do
+    it 'removes all entries from the address book' do
+      book.add_entry('Moses Mallone', '555.555.1234', 'moses@gmail.sik')
+      book.add_entry('Moses Mallone', '555.555.1234', 'moses@gmail.sik')
+      book.add_entry('Moses Mallone', '555.555.1234', 'moses@gmail.sik')
+      book.nuke_all_entries
+      expect(book.entries.size).to eq 0
+    end
+  end
+  
 end

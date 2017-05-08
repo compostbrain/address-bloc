@@ -15,7 +15,8 @@ class MenuController
     puts "3 - Create an entry"
     puts "4 - Search for an entry"
     puts "5 - Import entries from a cvs"
-    puts "6 - Exit"
+    puts '6 - Delete all entries'
+    puts "7 - Exit"
     print "Enter your selection: "
     selection = gets.to_i
     case selection
@@ -40,6 +41,19 @@ class MenuController
         read_csv
         main_menu
       when 6
+        puts 'Are you sure you want to delete all entries from the address book? y/n: '
+        selection = gets.chomp
+
+        if selection == 'y'
+          system 'clear'
+          address_book.nuke_all_entries
+          puts 'All items have been deleted'
+        else
+          system 'clear'
+          main_menu
+        end
+        main_menu
+      when 7
         puts "Good-bye!"
         exit(0)
       else
@@ -49,7 +63,7 @@ class MenuController
     end
   end
 
-  def view_all_entries
+    def view_all_entries
     address_book.entries.each do |entry|
       system 'clear'
       puts entry.to_s
@@ -170,6 +184,8 @@ class MenuController
     begin
       entry_count = address_book.import_from_csv(file_name).count
       system 'clear'
+      puts "#{entry_count} new entries added from #{file_name}"
+    rescue
       puts "#{entry_count} is not a valic CSV file, please enter the name of a valid CSV file"
       read_csv
     end
